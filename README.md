@@ -22,7 +22,7 @@
 
    //localhost:8080/register?account=user_account&password=user_password
 
-   ```js
+   ```
    {
        status: 'ok'| 'error',
        message: 'error'
@@ -33,7 +33,7 @@
 
    //localhost:8080/login?account=user_account&password=user_password
 
-   ```js
+   ```
    {
        status: 'ok' | 'error'
        message: 'uid' | 'error'
@@ -44,7 +44,7 @@
 
    //localhost:8080/add?uid=user_id&message=the_message
 
-   ```js
+   ```
    {
        status: 'ok' | 'error'
        message: 'error'
@@ -55,7 +55,7 @@
 
    //localhost:8080/update?uid=user_id&message=the_message&mid=message_id
 
-   ```js
+   ```
    {
        status: 'ok' | 'error'
        message: 'error'
@@ -66,7 +66,7 @@
 
    //localhost:8080/delete?mid=message_id
 
-   ```js
+   ```
    {
        status: 'ok' | 'error'
        message: 'error'
@@ -77,7 +77,7 @@
 
    //localhost:8080/list?uid=user_id
 
-   ```js
+   ```
    [
        {
            message_content: 'lalalala',
