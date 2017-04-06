@@ -1,0 +1,14 @@
+{
+  "name": "navbar",
+  "version": "0.0.1",
+  "dependencies": {
+    "babel-core": "^6.24.0",
+    "babel-loader": "^6.4.1",
+    "babel-preset-latest": "^6.24.0",
+    "babel-runtime": "^6.23.0",
+    "css-loader": "^0.27.3",
+    "vue-loader": "^11.0.0",
+    "vue-template-loader": "^0.2.2",
+    "webpack": "^1.14.0"
+  }
+}
