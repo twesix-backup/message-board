@@ -1,21 +1,28 @@
-let routes =
+const login = { template: '<login></login>' };
+const register = { template: '<register></register>' };
+const add = { template: '<add></add>' };
+const list = { template: '<list></list>' };
+
+const routes =
     [
         {
             path:'/add',
-            component: require('../components/add.vue')
+            component: Vue.extend(require('../components/add.vue'))
         },
         {
             path:'/list',
-            component: require('../components/list.vue')
+            component: list
         },
         {
             path:'/login',
-            component: require('../components/login.vue')
+            component: login
         },
         {
             path:'/register',
-            component: require('../components/register.vue')
+            component: register
         }
     ];
 
-let router = new VueRouter(routes);
+const router = new VueRouter(routes);
+
+module.exports = router;
