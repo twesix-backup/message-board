@@ -2,14 +2,14 @@
     <div>
         <h3>登录</h3>
         <hr>
-        <form class="form">
+        <form class="form" @submit.prevent="submit()">
             <div class="form-group">
                 <label for="account">账户</label>
-                <input type="text" v-model="acount" id="account" class="form-control">
+                <input type="text" v-model="account" id="account" class="form-control">
             </div>
             <div class="form-group">
                 <label for="password">账户</label>
-                <input type="text" v-model="password" id="password" class="form-control">
+                <input type="password" v-model="password" id="password" class="form-control">
             </div>
             <br>
             <button type="submit" class="btn btn-default">登录</button>
@@ -22,15 +22,16 @@
             data: function()
             {
                 return {
-                    account: '账户',
-                    password:'密码'
+                    account: '',
+                    password:''
                 };
             },
             methods:
                 {
                     submit: function()
                     {
-
+                        let url = `//localhost:8080/login?account=${this.account}&password=${this.password}`;
+                        console.log(url);
                     }
                 }
         }
