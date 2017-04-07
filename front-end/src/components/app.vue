@@ -23,8 +23,6 @@
 <script>
     module.exports =
         {
-            el:'#app',
-            router:require('../routers/index'),
             data: function()
             {
                 return {
@@ -47,7 +45,6 @@
     }
     .router-link-active
     {
-        /*z-index: 2;*/
         color: #fff;
         background-color: #337ab7;
         border-color: #337ab7;

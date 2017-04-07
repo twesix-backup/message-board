@@ -1,13 +1,13 @@
-const login = { template: '<login></login>' };
-const register = { template: '<register></register>' };
-const add = { template: '<add></add>' };
-const list = { template: '<list></list>' };
+const login = require('../components/login.vue');
+const register = require('../components/register.vue');
+const add = require('../components/add.vue');
+const list = require('../components/list.vue');
 
 const routes =
     [
         {
             path:'/add',
-            component: Vue.extend(require('../components/add.vue'))
+            component: add
         },
         {
             path:'/list',
@@ -23,6 +23,6 @@ const routes =
         }
     ];
 
-const router = new VueRouter(routes);
+const router = new VueRouter({ routes:routes });
 
 module.exports = router;
