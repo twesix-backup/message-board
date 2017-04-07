@@ -3,7 +3,7 @@
         <div class="container-fluid">
             <br>
             <h1>留言板</h1>
-            <h4 id="account">{{account}}</h4>
+            <h4 class="text-right">{{account}}</h4>
             <hr>
             <div class="row">
                 <div class="col-sm-3">
@@ -46,7 +46,7 @@
                 }
         }
 </script>
-<style>
+<style scoped>
     .list-group-item
     {
         cursor: pointer;
@@ -57,7 +57,7 @@
         background-color: #337ab7;
         border-color: #337ab7;
     }
-    #account
+    .text-right
     {
         text-align: right;
     }
