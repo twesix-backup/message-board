@@ -3,6 +3,7 @@
         <div class="container-fluid">
             <br>
             <h1>留言板</h1>
+            <h4 id="account">{{account}}</h4>
             <hr>
             <div class="row">
                 <div class="col-sm-3">
@@ -35,6 +36,13 @@
                     register:require('./register.vue'),
                     add:require('./add.vue'),
                     list:require('./list.vue')
+                },
+            computed:
+                {
+                    account: function()
+                    {
+                        return this.$store.state.account;
+                    }
                 }
         }
 </script>
@@ -48,5 +56,9 @@
         color: #fff;
         background-color: #337ab7;
         border-color: #337ab7;
+    }
+    #account
+    {
+        text-align: right;
     }
 </style>

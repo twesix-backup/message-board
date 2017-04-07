@@ -5,7 +5,7 @@
         <form class="form">
             <div class="form-group">
                 <label for="message">留言内容</label>
-                <textarea v-model="message" id="message" class="form-control"></textarea>
+                <textarea rows="10" v-model="message" id="message" class="form-control"></textarea>
             </div>
             <br>
             <button type="submit" class="btn btn-default">提交</button>
