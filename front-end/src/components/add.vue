@@ -2,7 +2,7 @@
     <div>
         <h3>发表留言</h3>
         <hr>
-        <form class="form">
+        <form class="form" @submit.prevent="submit()">
             <div class="form-group">
                 <label for="message">留言内容</label>
                 <textarea rows="10" v-model="message" id="message" class="form-control"></textarea>
@@ -25,7 +25,15 @@
                 {
                     submit: function()
                     {
-
+                        if(this.$store.state.uid)
+                        {
+                            let url = `//localhost:8080/add?uid=${this.$store.state.uid}&message=${this.message}`;
+                            console.log(url);
+                        }
+                        else
+                        {
+                            alert('您没有登录');
+                        }
                     }
                 }
         }

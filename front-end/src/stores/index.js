@@ -3,8 +3,8 @@ const store = new Vuex.Store
     {
         state:
             {
-                account:'未登录',
-                uid:''
+                account:'孟政元',
+                uid:'twesix'
             },
         mutations:
             {
