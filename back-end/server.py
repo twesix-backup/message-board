@@ -17,6 +17,7 @@ app = web.application(urls, globals())
 class Register:
     def GET(self):
         i = web.input()
+        web.header("Access-Control-Allow-Origin", "*")
         account = i.account
         password = i.password
         conn = MyDatabase.get_conn()

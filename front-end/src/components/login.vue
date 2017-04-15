@@ -31,6 +31,19 @@
                     submit: function()
                     {
                         let url = `//localhost:8080/login?account=${this.account}&password=${this.password}`;
+                        window.fetch(url)
+                            .then(function(res)
+                            {
+                                console.log(res);
+//                                if(res.status === 'ok')
+//                                {
+//                                    alert('注册成功');
+//                                }
+                            },function(err)
+                            {
+                                console.log(err);
+                                alert('网络错误');
+                            });
                         console.log(url);
                     }
                 }

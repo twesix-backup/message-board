@@ -29,6 +29,19 @@
                         {
                             let url = `//localhost:8080/add?uid=${this.$store.state.uid}&message=${this.message}`;
                             console.log(url);
+                            window.fetch(url)
+                                .then(function(res)
+                                {
+                                    console.log(res);
+//                                if(res.status === 'ok')
+//                                {
+//                                    alert('注册成功');
+//                                }
+                                },function(err)
+                                {
+                                    console.log(err);
+                                    alert('网络错误');
+                                });
                         }
                         else
                         {
