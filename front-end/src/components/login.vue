@@ -30,21 +30,41 @@
                 {
                     submit: function()
                     {
+                        let self = this;
+
                         let url = `//localhost:8080/login?account=${this.account}&password=${this.password}`;
+                        console.log(url);
+
                         window.fetch(url)
                             .then(function(res)
                             {
                                 console.log(res);
-//                                if(res.status === 'ok')
-//                                {
-//                                    alert('注册成功');
-//                                }
-                            },function(err)
-                            {
-                                console.log(err);
-                                alert('网络错误');
+                                if(res.ok)
+                                {
+                                    res.json().then(function(res)
+                                    {
+                                        console.log(res);
+                                        if(res.status == 'ok')
+                                        {
+                                            self.$store.commit(
+                                                'login',
+                                                {
+                                                    account: self.account,
+                                                    uid: res.message
+                                                });
+                                            alert('登录成功');
+                                        }
+                                        else
+                                        {
+                                            alert(res.message);
+                                        }
+                                    })
+                                }
+                                else
+                                {
+                                    alert('网络错误');
+                                }
                             });
-                        console.log(url);
                     }
                 }
         }
