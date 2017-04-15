@@ -9,7 +9,7 @@ class MyDatabase:
             conn = sqlite3.connect("MessageBoard.db")
             return conn
         except ConnectionError:
-            error="can't connect the database"
+            error = "can't connect the database"
             return error
 
 

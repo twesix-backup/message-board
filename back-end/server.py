@@ -1,6 +1,6 @@
 import web
 from dbUtil import MyDatabase
-from datetime import datetime
+import time
 
 urls = (
     '/register', 'Register',
@@ -29,10 +29,13 @@ class Register:
         pass
 
     def GET(self):
-        i = web.input()
+
         web.header("Access-Control-Allow-Origin", "*")
+
+        i = web.input()
         account = i.account
         password = i.password
+
         conn = MyDatabase.get_conn()
         if conn == "can't connect the database":
             respond = "{\"status\":\"error\",\"message\":\"can't connect the database\"}"
@@ -40,11 +43,11 @@ class Register:
             cursor = conn.cursor()
             cursor.execute("select * from user where account='%s'" % account)
             data = cursor.fetchall()
-            id = int(datetime.now().timestamp() * 1000000)
             if data.__len__() > 0:
                 respond = "{\"status\":\"error\",\"message\":\"the account already exists\"}"
             else:
-                cursor.execute("insert into user(uid,account,password)values('%s','%s','%s')" % (id, account, password))
+                uid = int(time.time() * 1000)
+                cursor.execute("insert into user(uid,account,password) values('%s','%s','%s')" % (uid, account, password))
                 respond = "{\"status\":\"ok\",\"message\":\"\"}"
             conn.commit()
             cursor.close()
