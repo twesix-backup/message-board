@@ -8,13 +8,26 @@ urls = (
     '/add', 'Add',
     '/update', 'Update',
     '/delete', 'Delete',
-    '/list','List'
+    '/list', 'List',
+    '/', 'Index'
 )
 
 app = web.application(urls, globals())
 
 
+class Index:
+    def __init__(self):
+        pass
+
+    def GET(self):
+        web.header("Access-Control-Allow-Origin", "*")
+        return '/'
+
+
 class Register:
+    def __init__(self):
+        pass
+
     def GET(self):
         i = web.input()
         web.header("Access-Control-Allow-Origin", "*")
@@ -129,6 +142,7 @@ class Delete:
             conn.close()
         return respond
 
+
 class List:
     def GET(self):
         i=web.input()
@@ -144,22 +158,23 @@ class List:
                 respond = "{\"status\":\"error\",\"message\":\"uid is incorrect\"}"
             else:
                 cursor.execute("select * from message")
-                data=cursor.fetchall()
-                respond="["
-                j=0
+                data = cursor.fetchall()
+                respond = "["
+                j = 0
                 for i in data:
-                    j+=1
-                    if i[0]==uid:
-                        respond+="{\"message_content\":\"%s\",\"message_id\":\"%s\"}"%(i[2],i[1])
+                    j += 1
+                    if i[0] == uid:
+                        respond += "{\"message_content\":\"%s\",\"message_id\":\"%s\"}"%(i[2],i[1])
                     else:
                         respond += "{\"message_content\":\"%s\"}" % i[2]
-                    if j<data.__len__():
-                        respond+=","
-                respond+="]"
+                    if j < data.__len__():
+                        respond += ","
+                respond += "]"
             conn.commit()
             cursor.close()
             conn.close()
         return respond
 
 
-if __name__ == '__main__': app.run()
+if __name__ == '__main__':
+    app.run()
