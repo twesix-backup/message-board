@@ -57,9 +57,13 @@ class Register:
 
 class Login:
     def GET(self):
+
+        web.header("Access-Control-Allow-Origin", "*")
+
         i = web.input()
         account = i.account
         password = i.password
+
         conn = MyDatabase.get_conn()
         if conn == "can't connect the database":
             respond = "{\"status\":\"error\",\"message\":\"can't connect the database\"}"
@@ -79,9 +83,13 @@ class Login:
 
 class Add:
     def GET(self):
+
+        web.header("Access-Control-Allow-Origin", "*")
+
         i = web.input()
         uid = i.uid
         message = i.message
+
         conn = MyDatabase.get_conn()
         if conn == "can't connect the database":
             respond = "{\"status\":\"error\",\"message\":\"can't connect the database\"}"
@@ -92,8 +100,8 @@ class Add:
             if data.__len__() <= 0:
                 respond = "{\"status\":\"error\",\"message\":\"uid is incorrect\"}"
             else:
-                id = int(datetime.now().timestamp() * 1000000)
-                cursor.execute("insert into message (uid,mid,message)values('%s','%s','%s')" % (uid, id, message))
+                mid = int(time.time() * 1000)
+                cursor.execute("insert into message (uid,mid,message)values('%s','%s','%s')" % (uid, mid, message))
                 respond = "{\"status\":\"ok\",\"message\":\"\"}"
             conn.commit()
             cursor.close()
@@ -103,22 +111,22 @@ class Add:
 
 class Update:
     def GET(self):
+
+        web.header("Access-Control-Allow-Origin", "*")
+
         i = web.input()
-        uid = i.uid
         mid = i.mid
         message = i.message
+
         conn = MyDatabase.get_conn()
         if conn == "can't connect the database":
             respond = "{\"status\":\"error\",\"message\":\"can't connect the database\"}"
         else:
             cursor = conn.cursor()
-            cursor.execute("select * from message where uid='%s' and mid='%s'" % (uid, mid))
-            data = cursor.fetchall()
-            if data.__len__() <= 0:
-                respond = "{\"status\":\"error\",\"message\":\"message doesn't exist\"}"
-            else:
-                cursor.execute("update message set message='%s' where uid='%s' and mid='%s'" % (message, uid, mid))
-                respond = "{\"status\":\"ok\",\"message\":\"\"}"
+
+            cursor.execute("update message set message='%s' where mid='%s'" % (message, mid))
+            respond = "{\"status\":\"ok\",\"message\":\"\"}"
+
             conn.commit()
             cursor.close()
             conn.close()
@@ -126,20 +134,21 @@ class Update:
 
 class Delete:
     def GET(self):
-        i=web.input()
-        mid=i.mid
+
+        web.header("Access-Control-Allow-Origin", "*")
+
+        i = web.input()
+        mid = i.mid
+
         conn = MyDatabase.get_conn()
         if conn == "can't connect the database":
             respond = "{\"status\":\"error\",\"message\":\"can't connect the database\"}"
         else:
             cursor = conn.cursor()
-            cursor.execute("select * from message where mid='%s'" % mid)
-            data = cursor.fetchall()
-            if data.__len__() <= 0:
-                respond = "{\"status\":\"error\",\"message\":\"message doesn't exist\"}"
-            else:
-                cursor.execute("delete from message where  mid='%s'" % mid)
-                respond = "{\"status\":\"ok\",\"message\":\"\"}"
+
+            cursor.execute("delete from message where  mid='%s'" % mid)
+            respond = "{\"status\":\"ok\",\"message\":\"\"}"
+
             conn.commit()
             cursor.close()
             conn.close()
@@ -148,31 +157,31 @@ class Delete:
 
 class List:
     def GET(self):
-        i=web.input()
-        uid=i.uid
+
+        web.header("Access-Control-Allow-Origin", "*")
+
+        i = web.input()
+        uid = i.uid
+
         conn = MyDatabase.get_conn()
         if conn == "can't connect the database":
             respond = "{\"status\":\"error\",\"message\":\"can't connect the database\"}"
         else:
             cursor = conn.cursor()
-            cursor.execute("select * from message where uid='%s'" % uid)
+            cursor.execute("select * from message")
             data = cursor.fetchall()
-            if data.__len__() <= 0:
-                respond = "{\"status\":\"error\",\"message\":\"uid is incorrect\"}"
-            else:
-                cursor.execute("select * from message")
-                data = cursor.fetchall()
-                respond = "["
-                j = 0
-                for i in data:
-                    j += 1
-                    if i[0] == uid:
-                        respond += "{\"message_content\":\"%s\",\"message_id\":\"%s\"}"%(i[2],i[1])
-                    else:
-                        respond += "{\"message_content\":\"%s\"}" % i[2]
-                    if j < data.__len__():
-                        respond += ","
-                respond += "]"
+            respond = "["
+            j = 0
+            for i in data:
+                j += 1
+                if i[0] == uid:
+                    respond += "{\"message_content\":\"%s\",\"message_id\":\"%s\"}" % (i[2], i[1])
+                else:
+                    respond += "{\"message_content\":\"%s\"}" % i[2]
+                if j < data.__len__():
+                    respond += ","
+            respond += "]"
+
             conn.commit()
             cursor.close()
             conn.close()

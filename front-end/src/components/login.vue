@@ -52,7 +52,6 @@
                                                     account: self.account,
                                                     uid: res.message
                                                 });
-                                            alert('登录成功');
                                         }
                                         else
                                         {

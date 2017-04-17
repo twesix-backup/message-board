@@ -4,6 +4,9 @@
             <br>
             <h1>留言板</h1>
             <h4 class="text-right">{{account}}</h4>
+            <div class="text-right">
+                <button class="btn btn-danger" @click="logout()" v-show="$store.state.uid">退出登录</button>
+            </div>
             <hr>
             <div class="row">
                 <div class="col-sm-3">
@@ -42,6 +45,10 @@
                     account: function()
                     {
                         return this.$store.state.account;
+                    },
+                    logout: function()
+                    {
+                        this.$store.commit('logout');
                     }
                 }
         }
